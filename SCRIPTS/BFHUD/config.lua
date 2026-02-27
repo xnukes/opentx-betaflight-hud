@@ -1,30 +1,31 @@
--- /SCRIPTS/BFHUD/config.lua
-
 local C = {}
 
--- ===== sensor names (as shown in Telemetry -> Sensors) =====
 C.SENS = {
-  batt = "VFAS",   -- battery voltage
-  rssi = "RSSI",   -- RSSI
-  alt  = "Alt",    -- altitude
-  spd  = "GSpd",   -- ground speed
-  hdg  = "Hdg",    -- heading
-  gps  = "GPS",    -- GPS (table with lat/lon on OpenTX)
-  sats = "Tmp1",   -- satellites (often BF maps sats to Tmp1)
-  -- you can later use Tmp2 for status if you want
+  batt = "VFAS",
+  rssi = "RSSI",
+  alt  = "Alt",
+  spd  = "GSpd",
+  hdg  = "Hdg",
+  gps  = "GPS",
+
+  satsPrimary  = "Tmp1",
+  satsFallback = "Tmp2",
+
+  status = "Tmp2", -- často BF posílá "něco statusového" sem
 }
 
--- ===== units / scaling =====
-C.UNITS = {
-  speed = "kmh",     -- OpenTX often already shows km/h for GSpd
-  alt   = "m",
-  dist  = "m",
-}
-
--- ===== UI =====
 C.UI = {
-  showGrid = false,
   arrowSize = 10,
+}
+
+-- Volitelné: mapování bitů pro status (pokud se potvrdí, že Tmp2 je bitmask)
+-- Nechávám to defaultně vypnuté, aby se nic nehalucinovalo.
+C.STATUS_BITS = {
+  enabled = false,   -- až uvidíš, že to sedí, přepni na true
+  -- příklad (NEJEN tak, musí se potvrdit):
+  -- failsafe = 0,
+  -- gps_rescue = 1,
+  -- armed = 2,
 }
 
 return C
